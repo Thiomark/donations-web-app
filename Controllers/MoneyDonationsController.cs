@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Donations.Data;
 using Donations.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Donations.Controllers
 {
@@ -20,12 +21,14 @@ namespace Donations.Controllers
         }
 
         // GET: MoneyDonations
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.MoneyDonation.ToListAsync());
         }
 
         // GET: MoneyDonations/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace Donations.Controllers
         }
 
         // GET: MoneyDonations/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +56,7 @@ namespace Donations.Controllers
         // POST: MoneyDonations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Amount,Donor,CreatedAt,Used,Description")] MoneyDonation moneyDonation)
@@ -66,6 +71,7 @@ namespace Donations.Controllers
         }
 
         // GET: MoneyDonations/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +90,7 @@ namespace Donations.Controllers
         // POST: MoneyDonations/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,Donor,CreatedAt,Used,Description")] MoneyDonation moneyDonation)
@@ -117,6 +124,7 @@ namespace Donations.Controllers
         }
 
         // GET: MoneyDonations/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +143,7 @@ namespace Donations.Controllers
         }
 
         // POST: MoneyDonations/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
