@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Donations.Models.MoneyDonation>
+﻿@model IEnumerable<Donation.Models.MoneyDonation>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,7 +17,7 @@
                     @Html.DisplayNameFor(model => model.Donor)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedAt)
+                    @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Used)
@@ -26,23 +26,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
+                     <td>
+                    R @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.Donor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Donor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                        @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Used)
                     </td>
                     <td class="flex space-x-3 items-center">
                         <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a>
-                        <a asp-area="" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-controller="AllocateMoney" asp-action="Index">Allocate Money</a>
+                        <a asp-area="" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-controller="AllocateMoneys" asp-action="Index">Allocate Money</a>
                     </td>
                 </tr>
             }

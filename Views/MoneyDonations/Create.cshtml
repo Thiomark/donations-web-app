@@ -1,4 +1,4 @@
-﻿@model Donations.Models.MoneyDonation
+﻿@model Donation.Models.MoneyDonation
 
 @{
     ViewData["Title"] = "Create";
@@ -42,6 +42,7 @@
         <a asp-action="Index">Back to List</a>
     </div>
  </div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Donations.Data;
-using Donations.Models;
-using Microsoft.AspNetCore.Authorization;
+using Donation.Data;
+using Donation.Models;
 
-namespace Donations.Controllers
+namespace Donation.Controllers
 {
     public class CategoriesController : Controller
     {
@@ -21,14 +20,12 @@ namespace Donations.Controllers
         }
 
         // GET: Categories
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Category.ToListAsync());
         }
 
         // GET: Categories/Details/5
-        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,7 +44,6 @@ namespace Donations.Controllers
         }
 
         // GET: Categories/Create
-        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -56,7 +52,6 @@ namespace Donations.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,CreatedAt")] Category category)
@@ -71,7 +66,6 @@ namespace Donations.Controllers
         }
 
         // GET: Categories/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,7 +84,6 @@ namespace Donations.Controllers
         // POST: Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreatedAt")] Category category)
@@ -124,7 +117,6 @@ namespace Donations.Controllers
         }
 
         // GET: Categories/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,7 +135,6 @@ namespace Donations.Controllers
         }
 
         // POST: Categories/Delete/5
-        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

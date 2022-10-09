@@ -4,41 +4,87 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Donations</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800&display=swap" >
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <header class="border-b">
-        <div>
-            <partial name="_LoginPartial" />
-            <div>
-                <a asp-area="" class="hover:no-underline" asp-controller="Home" asp-action="Index">D<span>A</span>F<span>The Disaster Alleviation Foundation</span></a>
-                <ul>
-                    <li>
-                        <a class="text-lg text-gray-600 hover:no-underline" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                    </li>
-                    <li>
-                        <a class="text-lg text-gray-600 hover:no-underline" asp-area="" asp-controller="Disasters" asp-action="Index">Disasters</a>
-                    </li>
-                    <li>
-                        <a class="text-lg text-gray-600 hover:no-underline" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
-                    </li>
-                    <li>
-                        <a class="text-lg text-gray-600 hover:no-underline" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Money Donations</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+    <div class="bg-orange-500">
+        <partial name="_LoginPartial" />
+    </div>
+    <header class="bg-light">
+        <nav class="navbar container navbar-expand-lg navbar-light">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav flex-grow-1">
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Donations - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Goods Catergories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Disasters" asp-action="Index">Disasters</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AllocateMoneys" asp-action="Index">Allocated Money</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AllocateGoods" asp-action="Index">Allocated Goods</a>
+                        </li>
+                    }
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+           </nav>
+    </header>
+    <div class="container min-h-screen">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="flex justify-center px-4 text-gray-800 bg-white">
+        <div class="container py-6">
+            <h1 class="text-lg font-bold text-center lg:text-2xl">
+                Join 31,000+ other and never miss <br> out on new tips, tutorials, and more.
+            </h1>
+
+            <div class="flex justify-center mt-6">
+                <div class="bg-white border rounded-md focus-within:ring dark:bg-gray-900 dark:border-gray-700 focus-within:border-blue-400 focus-within:ring-blue-300 focus-within:ring-opacity-40 dark:focus-within:border-blue-300">
+                    <div class="flex flex-wrap justify-between md:flex-row">
+                        <input type="email" class="p-2 m-1 text-sm text-gray-700 bg-transparent appearance-none focus:outline-none focus:placeholder-transparent" placeholder="Enter your email" aria-label="Enter your email">
+                        <button class="w-full px-3 py-2 m-1 text-sm font-medium tracking-wider text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded-md dark:hover:bg-gray-600 dark:bg-gray-800 lg:w-auto hover:bg-gray-700">subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="h-px mt-6 bg-gray-200 border-none dark:bg-gray-700">
+
+            <div class="flex flex-col items-center justify-between mt-6 md:flex-row">
+                <div>
+                    <a href="#" class="text-xl font-bold text-gray-800 transition-colors duration-300 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">Brand</a>
+                </div>
+
+                <div class="flex md:m-0">
+                    <div class="-mx-4">
+                        <a href="#" class="px-4 text-sm font-medium text-black">About</a>
+                        <a href="#" class="px-4 text-sm font-medium text-black">Blog</a>
+                        <a href="#" class="px-4 text-sm font-medium text-black">News</a>
+                        <a href="#" class="px-4 text-sm font-medium text-black">Contact</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

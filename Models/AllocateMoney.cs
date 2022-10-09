@@ -1,14 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
-namespace Donations.Models
+namespace Donation.Models
 {
     public class AllocateMoney
     {
         public int Id { get; set; }
         public double Amount { get; set; }
-        public double RemainingAmount { get; set; }
+        [Display(Name = "Allocated To")]
         public string AllocatedTo { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
         public string Description { get; set; }
 
     }

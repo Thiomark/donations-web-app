@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Donations.Models.GoodsDonation>
+﻿@model IEnumerable<Donation.Models.GoodsDonation>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,7 +6,7 @@
 
 <div class="max-w-[1600px] mx-auto py-4">
     <h1 class="text-2xl font-bold">Goods Donations</h1>
-    <p class="mt-2 mb-8"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>      
+    <p class="mt-2 mb-8"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
     <table class="table">
         <thead>
             <tr>
@@ -29,29 +29,30 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfItems)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Donor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RemainingItems)
-                </td>
-                <td>
-                     <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a>
-               
-                </td>
-            </tr>
-    }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfItems)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Donor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RemainingItems)
+                    </td>
+                    <td>
+                        <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a>
+
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

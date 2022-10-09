@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Donations.Data;
-using Donations.Models;
+using Donation.Data;
+using Donation.Models;
 
-namespace Donations.Controllers
+namespace Donation.Controllers
 {
     public class AllocateMoneysController : Controller
     {
@@ -22,7 +22,37 @@ namespace Donations.Controllers
         // GET: AllocateMoneys
         public async Task<IActionResult> Index()
         {
+            double collectedAmount = 0;
+            double allocatedAmount = 0;
+
+            foreach (var item in await _context.MoneyDonation.ToListAsync())
+            {
+                collectedAmount += item.Amount;
+            }
+            foreach (var item in await _context.AllocateMoney.ToListAsync())
+            {
+                allocatedAmount += item.Amount;
+            }
+
+            ViewData["RemainAmount"] = String.Format("{0:C}", collectedAmount - allocatedAmount);
+            ViewData["AllocatedAmount"] = String.Format("{0:C}", allocatedAmount);
+            ViewData["DonatedMoney"] = String.Format("{0:C}", collectedAmount);
+
             return View(await _context.AllocateMoney.ToListAsync());
+        }
+
+        public JsonResult GetData()
+        {
+
+            List<Disaster> disasters = new();
+            var disasterList = _context.Disaster.ToList();
+
+            foreach (var item in disasterList)
+            {
+                disasters.Add(item);
+            }
+
+            return Json(disasterList);
         }
 
         // GET: AllocateMoneys/Details/5
@@ -54,12 +84,21 @@ namespace Donations.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,RemainingAmount,AllocatedTo,CreatedAt,Description")] AllocateMoney allocateMoney)
+        public async Task<IActionResult> Create([Bind("Amount,AllocatedTo,Description")] AllocateMoney allocateMoney)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(allocateMoney);
+                double remainAmount = 0;
+                var items = await _context.MoneyDonation.ToListAsync();
+                foreach (var item in items)
+                {
+                    remainAmount += item.Amount;
+                }
+
+                AllocateMoney allocateMoney1 = new() { Amount = allocateMoney.Amount, Description = allocateMoney.Description, AllocatedTo = allocateMoney.AllocatedTo};
+                _context.Add(allocateMoney1);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(allocateMoney);
@@ -86,7 +125,7 @@ namespace Donations.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,RemainingAmount,AllocatedTo,CreatedAt,Description")] AllocateMoney allocateMoney)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,RemainingAmount,AllocatedTo,Description")] AllocateMoney allocateMoney)
         {
             if (id != allocateMoney.Id)
             {

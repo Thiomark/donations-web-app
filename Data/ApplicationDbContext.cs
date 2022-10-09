@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Donations.Models;
+using Donation.Models;
 
-namespace Donations.Data
+namespace Donation.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -13,10 +13,11 @@ namespace Donations.Data
             : base(options)
         {
         }
-        public DbSet<Donations.Models.Category> Category { get; set; }
-        public DbSet<Donations.Models.Disaster> Disaster { get; set; }
-        public DbSet<Donations.Models.GoodsDonation> GoodsDonation { get; set; }
-        public DbSet<Donations.Models.MoneyDonation> MoneyDonation { get; set; }
-        public DbSet<Donations.Models.AllocateMoney> AllocateMoney { get; set; }
+        public DbSet<Donation.Models.Category> Category { get; set; }
+        public DbSet<Donation.Models.Disaster> Disaster { get; set; }
+        public DbSet<Donation.Models.GoodsDonation> GoodsDonation { get; set; }
+        public DbSet<Donation.Models.MoneyDonation> MoneyDonation { get; set; }
+        public DbSet<Donation.Models.AllocateMoney> AllocateMoney { get; set; }
+        public DbSet<Donation.Models.AllocateGoods> AllocateGoods { get; set; }
     }
 }

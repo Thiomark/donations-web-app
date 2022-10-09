@@ -1,6 +1,6 @@
 using System;
 
-namespace Donations.Models
+namespace Donation.Models
 {
     public class ErrorViewModel
     {

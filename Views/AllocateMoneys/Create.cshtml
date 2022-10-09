@@ -1,14 +1,11 @@
-﻿@model Donations.Models.AllocateMoney
+﻿@model Donation.Models.AllocateMoney
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>AllocateMoney</h4>
-<hr />
+<br />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -18,28 +15,18 @@
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RemainingAmount" class="control-label"></label>
-                <input asp-for="RemainingAmount" class="form-control" />
-                <span asp-validation-for="RemainingAmount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            
+            <div class="form-group" id="TextBoxContainer">
                 <label asp-for="AllocatedTo" class="control-label"></label>
-                <input asp-for="AllocatedTo" class="form-control" />
                 <span asp-validation-for="AllocatedTo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" />
             </div>
         </form>
     </div>
@@ -50,5 +37,40 @@
 </div>
 
 @section Scripts {
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var i = 1;
+            (function () {
+                try {
+                    var div = $("<div />");
+                    var value = "";
+                    var select = $("<select></select>").attr("id", "AllocatedTo").attr("class", "form-control").attr("name", "AllocatedTo");
+                    var opt = $("<option></option");
+                    select.append(opt);
+
+                    $.ajax({
+                        url: "/AllocateMoneys/GetData",
+                        datatype: "JSON",
+                        type: "Get",
+                        success: function (data) {
+                            debugger;
+                            let options = data.map(o => `<option id="${o.description}" value="${o.description}">${o.description}</option>`);
+                            select.append(options);
+
+                        }
+                    });
+
+                    div.append(select);
+                    $("#TextBoxContainer").append(select);
+                    i++;
+                } catch (e) {
+                    console.log(e.message);
+                }
+            })();
+        });
+    </script>
+
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

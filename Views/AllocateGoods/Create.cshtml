@@ -1,0 +1,101 @@
+﻿@model Donation.Models.AllocateGoods
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" id="GoodsContainer">
+                <label asp-for="AllocatedTo" class="control-label"></label>
+                
+                <span asp-validation-for="Goods" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="TextBoxContainer">
+                <label asp-for="Goods" class="control-label"></label>
+                <span asp-validation-for="AllocatedTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var i = 1;
+            (function () {
+                try {
+                    var div = $("<div />");
+                    var value = "";
+                    var select = $("<select></select>").attr("id", "AllocatedTo").attr("class", "form-control").attr("name", "AllocatedTo");
+                    var opt = $("<option></option");
+                    select.append(opt);
+
+                    $.ajax({
+                        url: "/AllocateGoods/GetGoodsData",
+                        datatype: "JSON",
+                        type: "Get",
+                        success: function (data) {
+                            debugger;
+                            let options = data.map(o => `<option id="${o.description}" value="${o.description}">${o.description}</option>`);
+                            select.append(options);
+
+                        }
+                    });
+
+                    div.append(select);
+                    $("#TextBoxContainer").append(select);
+                    i++;
+                } catch (e) {
+                    console.log(e.message);
+                }
+            })();
+
+            (function () {
+                try {
+                    var div = $("<div />");
+                    var value = "";
+                    var select = $("<select></select>").attr("id", "Goods").attr("class", "form-control").attr("name", "Goods");
+                    var opt = $("<option></option");
+                    select.append(opt);
+
+                    $.ajax({
+                        url: "/AllocateGoods/GetDisastersData",
+                        datatype: "JSON",
+                        type: "Get",
+                        success: function (data) {
+                            debugger;
+                            let options = data.map(o => `<option id="${o.requiredTypeOfAid}" value="${o.requiredTypeOfAid}">${o.requiredTypeOfAid}</option>`);
+                            select.append(options);
+
+                        }
+                    });
+
+                    div.append(select);
+                    $("#GoodsContainer").append(select);
+                    i++;
+                } catch (e) {
+                    console.log(e.message);
+                }
+            })();
+        });
+    </script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

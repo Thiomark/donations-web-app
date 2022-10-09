@@ -1,15 +1,19 @@
-﻿@model IEnumerable<Donations.Models.AllocateMoney>
+﻿@model IEnumerable<Donation.Models.AllocateMoney>
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<br />
+<h2 class="text-2xl font-bold">Allocated Money Donations</h2>
+<br />
+<p class="mt-2 mb-8"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
+<div class="flex items-center justify-between">
+    <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Remaing Amount: @ViewData["RemainAmount"]</h6>
+    <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Allocated Amount: @ViewData["AllocatedAmount"]</h6> 
+    <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Donated Amount: @ViewData["DonatedMoney"]</h6>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -17,13 +21,7 @@
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RemainingAmount)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.AllocatedTo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -35,24 +33,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RemainingAmount)
+                R @Html.DisplayFor(modelItem =>  item.Amount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AllocatedTo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
