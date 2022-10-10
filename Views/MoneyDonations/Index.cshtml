@@ -40,8 +40,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Used)
                     </td>
-                    <td>
+                    <td class="flex space-x-3 items-center">
                         <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a>
+                        <a asp-area="" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-controller="AllocateMoney" asp-action="Index">Allocate Money</a>
                     </td>
                 </tr>
             }
