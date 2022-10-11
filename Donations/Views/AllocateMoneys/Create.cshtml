@@ -1,0 +1,62 @@
+﻿@model Donations.Models.AllocateMoney
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="max-w-[1600px] mx-auto py-6">
+    <div class="flex items-center justify-between p-4 bg-gray-100 mb-6">
+        <h1 class="text-2xl font-bold capitalize">Categories of goods</h1>
+        <p><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
+    </div>
+    <h4 class="font-bold text-lg mb-2">Name</h4>
+</div>
+
+<div class="max-w-[1600px] mx-auto py-4">
+    <h1 class="text-2xl font-bold mb-6">Allocate Money</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RemainingAmount" class="control-label"></label>
+                    <input asp-for="RemainingAmount" class="form-control" />
+                    <span asp-validation-for="RemainingAmount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AllocatedTo" class="control-label"></label>
+                    <input asp-for="AllocatedTo" class="form-control" />
+                    <span asp-validation-for="AllocatedTo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedAt" class="control-label"></label>
+                    <input asp-for="CreatedAt" class="form-control" />
+                    <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>
