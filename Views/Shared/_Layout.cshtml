@@ -13,17 +13,16 @@
         <partial name="_LoginPartial" />
     </div>
     <header class="bg-light">
-        <nav class="navbar container navbar-expand-lg navbar-light">
+        <nav class="navbar container navbar-expand-lg navbar-light bg-red-500">
+            <h1>hekko</h1>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                  
                 <ul class="navbar-nav flex-grow-1">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
+                            <a class="nav-link text-black" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Goods Catergories</a>
@@ -40,7 +39,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AllocateGoods" asp-action="Index">Allocated Goods</a>
                         </li>
-                    }
+                            
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
