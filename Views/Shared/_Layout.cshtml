@@ -21,7 +21,7 @@
                     </li>
                 }
                 <li class="nav-item">
-                    <a class="nav-link text-black" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
@@ -46,7 +46,7 @@
     <footer class="flex justify-center px-4 text-gray-800 bg-white">
         <div class="container py-6">
             <h1 class="text-lg font-bold text-center lg:text-2xl">
-                Join 31,000+ other and never miss <br> out on new tips, tutorials, and more.
+                Get updates when <br> donations are made.
             </h1>
 
             <div class="flex justify-center mt-6">
@@ -58,19 +58,20 @@
                 </div>
             </div>
 
-            <hr class="h-px mt-6 bg-gray-200 border-none dark:bg-gray-700">
+            <hr class="h-px mt-6 bg-gray-100 border-none">
 
             <div class="flex flex-col items-center justify-between mt-6 md:flex-row">
                 <div>
-                    <a href="#" class="text-xl font-bold text-gray-800 transition-colors duration-300 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">Brand</a>
+                    <a href="#" class="text-xl font-bold text-gray-800 transition-colors duration-300 hover:text-gray-700">DAF</a>
                 </div>
 
                 <div class="flex md:m-0">
                     <div class="-mx-4">
-                        <a href="#" class="px-4 text-sm font-medium text-black">About</a>
-                        <a href="#" class="px-4 text-sm font-medium text-black">Blog</a>
-                        <a href="#" class="px-4 text-sm font-medium text-black">News</a>
-                        <a href="#" class="px-4 text-sm font-medium text-black">Contact</a>
+                        <a class="px-2 text-sm font-medium text-black" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
+                        <a class="px-2 text-sm font-medium text-black" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
+                        <a class="px-2 text-sm font-medium text-black" asp-area="" asp-controller="Disasters" asp-action="Index">Disasters</a>
+                        <a class="px-2 text-sm font-medium text-black" asp-area="" asp-controller="AllocateMoneys" asp-action="Index">Allocated Money</a>
+                        <a class="px-2 text-sm font-medium text-black" asp-area="" asp-controller="AllocateGoods" asp-action="Index">Allocated Goods</a>
                     </div>
                 </div>
             </div>
