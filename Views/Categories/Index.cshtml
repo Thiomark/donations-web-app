@@ -8,10 +8,12 @@
 <div class="max-w-[1600px] mx-auto py-4">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold">Categories</h1>
-        <p class="mt-2 mb-8"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
+        @if(User.Identity.IsAuthenticated) { 
+            <p class="mt-2"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
+        }
     </div>
     
-    <table class="table">
+    <table class="table mt-8">
         <thead>
             <tr>
                 <th>
@@ -28,7 +30,9 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        <a asp-action="Delete" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Delete</a>
+                        @if(User.Identity.IsAuthenticated) { 
+                            <a asp-action="Delete" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Delete</a>
+                        }
                     </td>
                 </tr>
             }

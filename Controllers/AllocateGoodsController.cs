@@ -39,6 +39,50 @@ namespace Donation.Controllers
             return Json(disasterList);
         }
 
+        public JsonResult GetHomeInfo()
+        {
+
+            List<Disaster> disasters = new();
+            List<AllocateMoney> allocatedMoneyDonations = new();
+            List<AllocateGoods> allocatedGoodsDonations = new();
+
+            double moneyDonationsMade = 0;
+            double moneyDonationsAllocated = 0;
+            var goodsDonationList = _context.AllocateGoods.ToList();
+
+            foreach (var item in _context.Disaster.ToList())
+            {
+                disasters.Add(item);
+            }
+
+            foreach (var item in _context.MoneyDonation.ToList())
+            {
+                moneyDonationsMade += item.Amount;
+            }
+
+            foreach (var item in _context.AllocateMoney.ToList())
+            {
+                moneyDonationsAllocated += item.Amount;
+                allocatedMoneyDonations.Add(item);
+            }
+
+            foreach (var item in _context.AllocateGoods.ToList())
+            {
+                allocatedGoodsDonations.Add(item);
+            }
+
+            HomeInfo homeInfo = new () { 
+                disasters = disasters,
+                goodsReceivedCount = goodsDonationList.Count,
+                moneyDonationsAllocated = String.Format("{0:C}", moneyDonationsAllocated), 
+                moneyDonationsMade = String.Format("{0:C}", moneyDonationsMade),
+                allocatedMoneyDonations = allocatedMoneyDonations, 
+                allocatedGoodsDonations = allocatedGoodsDonations 
+            };
+
+            return Json(homeInfo);
+        }
+
         public JsonResult GetGoodsData()
         {
 

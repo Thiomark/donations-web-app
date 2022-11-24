@@ -13,40 +13,30 @@
         <partial name="_LoginPartial" />
     </div>
     <header class="bg-light">
-        <nav class="navbar container navbar-expand-lg navbar-light bg-red-500">
-            <h1>hekko</h1>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                  
-                <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-black" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Goods Catergories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Disasters" asp-action="Index">Disasters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AllocateMoneys" asp-action="Index">Allocated Money</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AllocateGoods" asp-action="Index">Allocated Goods</a>
-                        </li>
-                            
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </div>
-           </nav>
+        <nav class="navbar container navbar-expand-lg navbar-light">
+            <ul class="navbar-nav flex-grow-1">
+                @if(User.Identity.IsAuthenticated) {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Goods Catergories</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link text-black" asp-area="" asp-controller="MoneyDonations" asp-action="Index">Monetary Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="GoodsDonations" asp-action="Index">Goods Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Disasters" asp-action="Index">Disasters</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="AllocateMoneys" asp-action="Index">Allocated Money</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="AllocateGoods" asp-action="Index">Allocated Goods</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <div class="container min-h-screen">
         <main role="main" class="pb-3">
