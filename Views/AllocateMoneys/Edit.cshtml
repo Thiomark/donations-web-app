@@ -14,9 +14,8 @@
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="AllocatedTo">
                 <label asp-for="AllocatedTo" class="control-label"></label>
-                <input asp-for="AllocatedTo" class="form-control" />
                 <span asp-validation-for="AllocatedTo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,5 +35,33 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            (function () {
+                try {
+                    var select = $("<select></select>").attr("id", "AllocatedTo").attr("class", "form-control").attr("name", "AllocatedTo");
+                    $.ajax({
+                        url: "/AllocateMoneys/GetData",
+                        datatype: "JSON",
+                        type: "Get",
+                        success: function (data) {
+                            debugger;
+                            let options = data.map(o => `<option value="${o.name}">${o.name}</option>`);
+                            select.append(options);
+
+                        }
+                    });
+                    $("#AllocatedTo").append(select);
+                } catch (e) {
+                    console.log(e.message);
+                }
+            })();
+        });
+    </script>
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

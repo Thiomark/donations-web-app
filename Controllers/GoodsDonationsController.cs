@@ -25,6 +25,20 @@ namespace Donation.Controllers
             return View(await _context.GoodsDonation.ToListAsync());
         }
 
+        public JsonResult GetData()
+        {
+
+            List<Category> allocateToDisasters = new();
+            var disasterList = _context.Category.ToList();
+
+            foreach (var item in disasterList)
+            {
+                allocateToDisasters.Add(item);
+            }
+
+            return Json(disasterList);
+        }
+
         // GET: GoodsDonations/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -16,14 +16,18 @@
                 <input asp-for="NumberOfItems" class="form-control" />
                 <span asp-validation-for="NumberOfItems" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="Category">
+                <label asp-for="Category" class="control-label"></label>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            @* <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
                 <select asp-for="Category" class="form-control">
                     <option value="Clothes">Clothes</option>
                     <option value="Non-perishable foods">Non-perishable foods</option>
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -52,5 +56,34 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            (function () {
+                try {
+                    var select = $("<select></select>").attr("id", "Category").attr("class", "form-control").attr("name", "Category");
+                    $.ajax({
+                        url: "/GoodsDonations/GetData",
+                        datatype: "JSON",
+                        type: "Get",
+                        success: function (data) {
+                            console.log(data)
+                            debugger;
+                            let options = data.map(o => `<option value="${o.name}">${o.name}</option>`);
+                            select.append(options);
+
+                        }
+                    });
+                    $("#Category").append(select);
+                } catch (e) {
+                    console.log(e.message);
+                }
+            })();
+        });
+    </script>
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
