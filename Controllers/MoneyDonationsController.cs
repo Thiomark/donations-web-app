@@ -22,6 +22,22 @@ namespace Donation.Controllers
         // GET: MoneyDonations
         public async Task<IActionResult> Index()
         {
+            double collectedAmount = 0;
+            double allocatedAmount = 0;
+
+            foreach (var item in await _context.MoneyDonation.ToListAsync())
+            {
+                collectedAmount += item.Amount;
+            }
+            foreach (var item in await _context.AllocateMoney.ToListAsync())
+            {
+                allocatedAmount += item.Amount;
+            }
+
+            ViewData["RemainAmount"] = String.Format("{0:C}", collectedAmount - allocatedAmount);
+            ViewData["AllocatedAmount"] = String.Format("{0:C}", allocatedAmount);
+            ViewData["DonatedMoney"] = String.Format("{0:C}", collectedAmount);
+
             return View(await _context.MoneyDonation.ToListAsync());
         }
 

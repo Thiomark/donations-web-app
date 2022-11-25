@@ -44,12 +44,12 @@ namespace Donation.Controllers
         public JsonResult GetData()
         {
 
-            List<Disaster> disasters = new();
-            var disasterList = _context.Disaster.ToList();
+            List<AllocateGoods> allocateToDisasters = new();
+            var disasterList = _context.AllocateGoods.ToList();
 
             foreach (var item in disasterList)
             {
-                disasters.Add(item);
+                allocateToDisasters.Add(item);
             }
 
             return Json(disasterList);

@@ -54,3 +54,20 @@
         </tbody>
     </table>
 </div>
+<div class='bg-gray-100 py-3 space-y-2 mt-10 divide-y-4 divide-white'>
+    <div class='px-3 flex align-items-center justify-between'>
+        <span class='font-bold'>Donated Amount</span>
+        <span class="font-bold text-blue-600">@ViewData["DonatedMoney"]</span>
+    </div>
+    <div class='px-3 flex align-items-center justify-between'>
+        <span class='font-bold'>Allocated Amount</span>
+        <span class="font-bold text-red-600">@ViewData["AllocatedAmount"]</span>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class='px-3 flex align-items-center justify-between'>
+            <span class='font-bold'>Remaing Amount</span>
+            <span class="font-bold text-green-600">@ViewData["RemainAmount"]</span>
+        </div>
+    }
+</div>

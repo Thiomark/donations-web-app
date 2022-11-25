@@ -10,12 +10,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" id="GoodsContainer">
+            <div class="form-group" id="AllocateTo">
                 <label asp-for="AllocatedTo" class="control-label"></label>
-                
                 <span asp-validation-for="Goods" class="text-danger"></span>
             </div>
-            <div class="form-group" id="TextBoxContainer">
+            <div class="form-group" id="GoodsDonated">
                 <label asp-for="Goods" class="control-label"></label>
                 <span asp-validation-for="AllocatedTo" class="text-danger"></span>
             </div>
@@ -38,58 +37,29 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            var i = 1;
+    
             (function () {
                 try {
-                    var div = $("<div />");
-                    var value = "";
-                    var select = $("<select></select>").attr("id", "AllocatedTo").attr("class", "form-control").attr("name", "AllocatedTo");
-                    var opt = $("<option></option");
-                    select.append(opt);
+                    var selectAllocateTo = $("<select></select>").attr("id", "AllocateToOption").attr("class", "form-control");
+                    var selectGoodsDonated = $("<select></select>").attr("id", "GoodsDonated").attr("class", "form-control");
 
                     $.ajax({
                         url: "/AllocateGoods/GetGoodsData",
                         datatype: "JSON",
                         type: "Get",
                         success: function (data) {
-                            debugger;
-                            let options = data.map(o => `<option id="${o.description}" value="${o.description}">${o.description}</option>`);
-                            select.append(options);
+                            console.log(data)
+                            let allocateToOptions = data.disasters.map(o => `<option id="AllocatedTo" value="${o.requiredTypeOfAid}">${o.requiredTypeOfAid}</option>`);
+                            let donatedGoodsOptions = data.goodsDonations.map(o => `<option id="AllocatedTo" value="${o.description}">${o.description}</option>`);
+                            
+                            selectAllocateTo.append(allocateToOptions);
+                            selectGoodsDonated.append(donatedGoodsOptions);
 
                         }
                     });
 
-                    div.append(select);
-                    $("#TextBoxContainer").append(select);
-                    i++;
-                } catch (e) {
-                    console.log(e.message);
-                }
-            })();
-
-            (function () {
-                try {
-                    var div = $("<div />");
-                    var value = "";
-                    var select = $("<select></select>").attr("id", "Goods").attr("class", "form-control").attr("name", "Goods");
-                    var opt = $("<option></option");
-                    select.append(opt);
-
-                    $.ajax({
-                        url: "/AllocateGoods/GetDisastersData",
-                        datatype: "JSON",
-                        type: "Get",
-                        success: function (data) {
-                            debugger;
-                            let options = data.map(o => `<option id="${o.requiredTypeOfAid}" value="${o.requiredTypeOfAid}">${o.requiredTypeOfAid}</option>`);
-                            select.append(options);
-
-                        }
-                    });
-
-                    div.append(select);
-                    $("#GoodsContainer").append(select);
-                    i++;
+                    $("#AllocateTo").append(selectAllocateTo);
+                    $("#GoodsDonated").append(selectGoodsDonated);
                 } catch (e) {
                     console.log(e.message);
                 }

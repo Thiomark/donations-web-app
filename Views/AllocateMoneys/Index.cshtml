@@ -10,13 +10,6 @@
 @if(User.Identity.IsAuthenticated) { 
     <p class="mt-2"><a class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-action="Create">Create New</a></p>
 }
-<div class="flex items-center justify-between mt-8">
-    @if(User.Identity.IsAuthenticated) { 
-        <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Remaing Amount: @ViewData["RemainAmount"]</h6>
-    }
-    <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Allocated Amount: @ViewData["AllocatedAmount"]</h6> 
-    <h6 class="py-4 px-10 bg-gray-200 font-bold rounded">Donated Amount: @ViewData["DonatedMoney"]</h6>
-</div>
 <br />
 <table class="table">
     <thead>
@@ -34,27 +27,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                R @Html.DisplayFor(modelItem =>  item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllocatedTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @if(User.Identity.IsAuthenticated) { 
-                    <div>
-                        <a asp-action="Edit" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Delete</a>
-                    </div>
-                }
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    R @Html.DisplayFor(modelItem =>  item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllocatedTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @if(User.Identity.IsAuthenticated) { 
+                        <div>
+                            <a asp-action="Edit" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" class="text-gray-200 hover:text-white hover:no-underline text-sm px-6 py-2 rounded bg-gray-900" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<div class='bg-gray-100 py-3 space-y-2 mt-20 divide-y-4 divide-white'>
+    <div class='px-3 flex align-items-center justify-between'>
+        <span class='font-bold'>Donated Amount</span>
+        <span class="font-bold text-blue-600">@ViewData["DonatedMoney"]</span>
+    </div>
+    <div class='px-3 flex align-items-center justify-between'>
+        <span class='font-bold'>Allocated Amount</span>
+        <span class="font-bold text-red-600">@ViewData["AllocatedAmount"]</span>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class='px-3 flex align-items-center justify-between'>
+            <span class='font-bold'>Remaing Amount</span>
+            <span class="font-bold text-green-600">@ViewData["RemainAmount"]</span>
+        </div>
+    }
+</div>

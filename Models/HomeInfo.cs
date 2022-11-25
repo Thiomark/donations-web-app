@@ -10,5 +10,6 @@ namespace Donation.Models
         public string moneyDonationsMade { get; set; }
         public string moneyDonationsAllocated { get; set; }
         public int goodsReceivedCount { get; set; }
+        public int goodsAllocatedCount { get; set; }
     }
 }

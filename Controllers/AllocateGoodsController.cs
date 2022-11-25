@@ -48,7 +48,7 @@ namespace Donation.Controllers
 
             double moneyDonationsMade = 0;
             double moneyDonationsAllocated = 0;
-            var goodsDonationList = _context.AllocateGoods.ToList();
+            var goodsDonationList = _context.GoodsDonation.ToList();
 
             foreach (var item in _context.Disaster.ToList())
             {
@@ -73,7 +73,8 @@ namespace Donation.Controllers
 
             HomeInfo homeInfo = new () { 
                 disasters = disasters,
-                goodsReceivedCount = goodsDonationList.Count,
+                goodsAllocatedCount = _context.AllocateGoods.ToList().Count,
+                goodsReceivedCount = _context.GoodsDonation.ToList().Count,
                 moneyDonationsAllocated = String.Format("{0:C}", moneyDonationsAllocated), 
                 moneyDonationsMade = String.Format("{0:C}", moneyDonationsMade),
                 allocatedMoneyDonations = allocatedMoneyDonations, 
@@ -86,15 +87,10 @@ namespace Donation.Controllers
         public JsonResult GetGoodsData()
         {
 
-            List<GoodsDonation> donatedGoods = new();
-            var goodsList = _context.GoodsDonation.ToList();
-
-            foreach (var item in goodsList)
-            {
-                donatedGoods.Add(item);
-            }
-
-            return Json(goodsList);
+            List<Disaster> disasters =_context.Disaster.ToList();
+            List<GoodsDonation> goodsDonation = _context.GoodsDonation.ToList();
+            GetAllocateGoodsInfo returnedJson = new GetAllocateGoodsInfo() { disasters = disasters , goodsDonations = goodsDonation };
+            return Json(returnedJson);
         }
 
         // GET: AllocateGoods/Details/5
@@ -126,7 +122,7 @@ namespace Donation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Goods,AllocatedTo,Description")] AllocateGoods allocateGoods)
+        public async Task<IActionResult> Create([Bind("Id,Goods,AllocateTo,Description")] AllocateGoods allocateGoods)
         {
             if (ModelState.IsValid)
             {
@@ -221,5 +217,13 @@ namespace Donation.Controllers
         {
             return _context.AllocateGoods.Any(e => e.Id == id);
         }
+    }
+
+    public class GetAllocateGoodsInfo
+    {
+        public List<Disaster> disasters { get; set; }
+
+        public List<GoodsDonation> goodsDonations { get; set; }
+
     }
 }
