@@ -54,7 +54,7 @@ namespace Donation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Location,Description,RequiredTypeOfAid")] Disaster disaster)
+        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Name,Location,Description,RequiredTypeOfAid")] Disaster disaster)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Donation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UpdatedAt,StartDate,EndDate,Location,Description,RequiredTypeOfAid")] Disaster disaster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UpdatedAt,StartDate,EndDate,Name,Location,Description,RequiredTypeOfAid")] Disaster disaster)
         {
             if (id != disaster.Id)
             {

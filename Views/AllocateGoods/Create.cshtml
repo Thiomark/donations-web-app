@@ -48,7 +48,7 @@
                         type: "Get",
                         success: function (data) {
                             debugger;
-                            let options = data.disasters.map(o => `<option value="${o.requiredTypeOfAid}">${o.description}</option>`);
+                            let options = data.disasters.map(o => `<option value="${o.name}">${o.name}</option>`);
                             let options2 = data.goodsDonations.map(o => `<option value="${o.description}">${o.description}</option>`);
                             select.append(options);
                             select2.append(options2);
