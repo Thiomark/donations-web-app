@@ -54,7 +54,7 @@
                         type: "Get",
                         success: function (data) {
                             debugger;
-                            let options = data.map(o => `<option id="${o.description}" value="${o.description}">${o.description}</option>`);
+                            let options = data.map(o => `<option value="${o.requiredTypeOfAid}">${o.description}</option>`);
                             select.append(options);
 
                         }

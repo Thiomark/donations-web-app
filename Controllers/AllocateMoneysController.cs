@@ -44,8 +44,8 @@ namespace Donation.Controllers
         public JsonResult GetData()
         {
 
-            List<AllocateGoods> allocateToDisasters = new();
-            var disasterList = _context.AllocateGoods.ToList();
+            List<Disaster> allocateToDisasters = new();
+            var disasterList = _context.Disaster.ToList();
 
             foreach (var item in disasterList)
             {

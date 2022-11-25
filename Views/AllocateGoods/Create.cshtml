@@ -10,11 +10,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" id="AllocateTo">
+            <div class="form-group" id="AllocatedTo">
                 <label asp-for="AllocatedTo" class="control-label"></label>
                 <span asp-validation-for="Goods" class="text-danger"></span>
             </div>
-            <div class="form-group" id="GoodsDonated">
+            <div class="form-group" id="Goods">
                 <label asp-for="Goods" class="control-label"></label>
                 <span asp-validation-for="AllocatedTo" class="text-danger"></span>
             </div>
@@ -37,29 +37,27 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-    
             (function () {
                 try {
-                    var selectAllocateTo = $("<select></select>").attr("id", "AllocateToOption").attr("class", "form-control");
-                    var selectGoodsDonated = $("<select></select>").attr("id", "GoodsDonated").attr("class", "form-control");
+                    var select = $("<select></select>").attr("id", "AllocatedTo").attr("class", "form-control").attr("name", "AllocatedTo");
+                    var select2 = $("<select></select>").attr("id", "Goods").attr("class", "form-control").attr("name", "Goods");
 
                     $.ajax({
                         url: "/AllocateGoods/GetGoodsData",
                         datatype: "JSON",
                         type: "Get",
                         success: function (data) {
-                            console.log(data)
-                            let allocateToOptions = data.disasters.map(o => `<option id="AllocatedTo" value="${o.requiredTypeOfAid}">${o.requiredTypeOfAid}</option>`);
-                            let donatedGoodsOptions = data.goodsDonations.map(o => `<option id="AllocatedTo" value="${o.description}">${o.description}</option>`);
-                            
-                            selectAllocateTo.append(allocateToOptions);
-                            selectGoodsDonated.append(donatedGoodsOptions);
+                            debugger;
+                            let options = data.disasters.map(o => `<option value="${o.requiredTypeOfAid}">${o.description}</option>`);
+                            let options2 = data.goodsDonations.map(o => `<option value="${o.description}">${o.description}</option>`);
+                            select.append(options);
+                            select2.append(options2);
 
                         }
                     });
 
-                    $("#AllocateTo").append(selectAllocateTo);
-                    $("#GoodsDonated").append(selectGoodsDonated);
+                    $("#AllocatedTo").append(select);
+                    $("#Goods").append(select2);
                 } catch (e) {
                     console.log(e.message);
                 }

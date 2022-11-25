@@ -122,7 +122,7 @@ namespace Donation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Goods,AllocateTo,Description")] AllocateGoods allocateGoods)
+        public async Task<IActionResult> Create([Bind("Id,Goods,AllocatedTo,Description")] AllocateGoods allocateGoods)
         {
             if (ModelState.IsValid)
             {
